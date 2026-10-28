@@ -152,12 +152,16 @@
     select(start, false);
     watch(root, player, function () { if (!loaded) { loaded = true; video.src = SRC + list[cur].id + '.mp4'; video.load(); } player.sync(); });
     window.__gallery = { select: select, video: video };
-    /* hero teaser tiles open the matching scene here */
+    /* Prefer the matching comparison; scenes without one open in the gallery. */
     Array.prototype.forEach.call(document.querySelectorAll('.teaser-hit button'), function (b) {
       var id = b.getAttribute('data-id'), i = list.findIndex(function (s) { return s.id === id; });
       if (i < 0) return;
-      b.setAttribute('aria-label', 'Open ' + DSNAME[list[i].ds] + ' scene ' + id.split('_')[1] + ' in the results gallery');
+      var ci = (DATA.compare || []).findIndex(function (s) { return s.id === id; });
+      var destination = ci >= 0 ? 'comparison' : 'results gallery';
+      b.setAttribute('aria-label', 'Open ' + DSNAME[list[i].ds] + ' scene ' + id.split('_')[1] + ' in the ' + destination);
+      b.title = ci >= 0 ? 'View baseline comparison' : 'View generated result and camera path';
       b.addEventListener('click', function () {
+        if (ci >= 0 && window.__cmp) { window.__cmp.open(ci); return; }
         loaded = true;
         select(i, true);
         root.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
@@ -239,8 +243,12 @@
     video.addEventListener('loadeddata', function () { mirror.draw(); });
     pick('worldwarp');
     scene(0, false);
-    watch(root, player, function () { loaded = true; video.src = SRC + list[curScene].id + '.mp4'; video.load(); player.sync(); });
-    window.__cmp = { scene: scene, pick: pick, video: video };
+    watch(root, player, function () { if (!loaded) { loaded = true; video.src = SRC + list[curScene].id + '.mp4'; video.load(); } player.sync(); });
+    window.__cmp = { scene: scene, pick: pick, video: video, open: function (i) {
+      loaded = true;
+      scene(i, true);
+      root.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+    } };
   })();
 
   /* ---------------------------------------------------------------- quantitative table */
@@ -279,3 +287,4 @@
     render('re10k');
   })();
 })();
+
