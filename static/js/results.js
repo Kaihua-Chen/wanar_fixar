@@ -196,7 +196,9 @@
     var trajView = { c: root.querySelector('.cmp-traj canvas'), r: [0, 672, 592, 336] };
     var gtView = { c: root.querySelector('.cmp-tile[data-m="gt"] canvas'), r: rectOf('gt') };
     var selView = { c: root.querySelector('.cmp-tile[data-m="sel"] canvas'), r: rectOf('worldwarp') };
-    mirror.views.push(trajView, gtView, selView);
+    /* Paint ours, ground truth, and the baseline together from the same video frame. */
+    var oursView = { c: root.querySelector('.cmp-vbox canvas'), r: rectOf('ours') };
+    mirror.views.push(gtView, oursView, selView, trajView);
     var selName = root.querySelector('.sel-name');
     var inImg = root.querySelector('.cmp-in img');
     var curScene = -1, curM = 'worldwarp', sceneBtns = [], miniBtns = [];

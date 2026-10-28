@@ -8,7 +8,7 @@
 <meta property="og:title" content="Hierarchical Diffusion for Camera-controlled Autoregressive Video Generation">
 <meta property="og:description" content="Camera-controlled long video generation from a single image: warp-and-inpaint autoregressive generation (WanAR) with hierarchical long-context denoising (FixAR, InterpolatAR).">
 <meta property="og:type" content="website">
-<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="static/css/style.css?v=sync-1">
 <link rel="canonical" href="https://kaihua-chen.github.io/wanar_fixar/">
 <meta property="og:url" content="https://kaihua-chen.github.io/wanar_fixar/">
 <meta property="og:image" content="https://kaihua-chen.github.io/wanar_fixar/static/teaser/teaser.jpg">
@@ -152,7 +152,7 @@
           <div class="tl-row"><div class="tl-lab"></div><div class="tl-axis"></div></div>
           <div class="tl-overlay"><div class="tl-play"></div></div>
         </div>
-        <p class="pl-note">Example with 230 frames: three WanAR rollouts, then 49 FixAR keyframes. WanAR, FixAR and InterpolatAR share the Wan2.1-14B architecture with separately trained LoRA checkpoints. The full three-stage pipeline can be repeated autoregressively to generate longer videos.</p>
+        <p class="pl-note">Example with 230 frames: three WanAR rollouts, then 49 FixAR keyframes. The timeline has one cell per two frames. WanAR, FixAR and InterpolatAR share the Wan2.1-14B architecture with separately trained LoRA checkpoints. The full three-stage pipeline can be repeated autoregressively to generate longer videos.</p>
       </div>
       <figure class="drift">
         <figcaption class="drift-head">
@@ -187,7 +187,7 @@
             <figure class="cmp-traj"><canvas aria-label="Camera trajectory"></canvas><figcaption>Camera trajectory</figcaption></figure>
           </div>
           <figure class="cmp-tile" data-m="gt"><canvas aria-label="Ground truth"></canvas><figcaption>Ground truth</figcaption></figure>
-          <figure class="cmp-tile ours" data-m="ours"><div class="cmp-vbox"><video muted playsinline loop preload="auto"></video></div><figcaption><b>WanAR + FixAR</b> (ours)</figcaption></figure>
+          <figure class="cmp-tile ours" data-m="ours"><div class="cmp-vbox"><video muted playsinline loop preload="auto"></video><canvas aria-label="WanAR + FixAR"></canvas></div><figcaption><b>WanAR + FixAR</b> (ours)</figcaption></figure>
           <figure class="cmp-tile sel" data-m="sel"><canvas aria-label="Selected baseline"></canvas><figcaption class="sel-name">WorldWarp</figcaption></figure>
         </div>
         <div class="vctl">
@@ -268,7 +268,7 @@
   <section id="bibtex" class="bib">
     <div class="wrap">
       <div class="bib-head"><p class="eyebrow" style="margin:0">BibTeX</p><button class="copy" type="button" data-copy="#bibtex-code">Copy</button></div>
-<pre id="bibtex-code">@misc{chen2026hierarchical,
+<pre id="bibtex-code">@article{chen2026hierarchical,
   title   = {Hierarchical Diffusion for Camera-controlled Autoregressive Video Generation},
   author  = {Chen, Kaihua and Gong, Yiming and Ramanan, Deva and Khurana, Tarasha},
   note    = {Manuscript},
@@ -285,7 +285,7 @@
 <script src="static/method/method_data.js"></script>
 <script src="static/js/method.js"></script>
 <script src="static/js/data.js"></script>
-<script src="static/js/results.js?v=2"></script>
+<script src="static/js/results.js?v=sync-1"></script>
 <script src="static/js/main.js"></script>
 </body>
 </html>
